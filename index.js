@@ -1,7 +1,8 @@
 const express = require('express');
-const Author = require('../sd-011-store-manager/models/Author');
+const { StatusCodes } = require('http-status-codes');
+const Author = require('./models/Author');
 const { PORT } = require('./statusCode');
-const { Product, Sales } = require('../sd-011-store-manager/routes');
+const { Product, Sales } = require('./routes');
 
 const app = express();
 
@@ -13,5 +14,5 @@ app.get('/sales', Sales);
 app.get('/authors', async (_req, res) => {
   const authors = await Author.getAll();
 
-  res.status(200).json(authors);
+  res.status(StatusCodes.OK).json(authors);
 });
