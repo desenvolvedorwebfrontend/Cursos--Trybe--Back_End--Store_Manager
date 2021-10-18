@@ -1,5 +1,0 @@
-const statusCode = {
-  PORT: 3000,
-};
-
-module.exports = statusCode;
