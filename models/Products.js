@@ -1,24 +1,42 @@
 const connection = require('./connection');
 
-// Cria uma string com o nome completo do autor
+// Busca todos os autores do banco.
+async function getAll() {
+  return connection()
+    .then((db) => db.collection('products').find().toArray())
+    .then((authors) =>
+      authors.map(({ _id, name, quantity }) => (
+        {
+          id: _id,
+          name,
+          quantity,
+        }
+      )));
+}
 
-const getNewAuthor = (authorData) => {
-  const { id, firstName, middleName, lastName } = authorData;
-
-  const fullName = [firstName, middleName, lastName]
-    .filter((name) => name)
-    .join(' ');
-
-  return {
-    id,
-    firstName,
-    middleName,
-    lastName,
-    name: fullName,
-  };
+module.exports = {
+  getAll,
+  // findByName,
 };
 
-// Converte o nome dos campos de snake_case para camelCase
+// const findByName = async (firstName, middleName, lastName) => {
+//   // Determinamos se devemos buscar com ou sem o nome do meio
+//   const query = middleName
+//     ? { firstName, middleName, lastName }
+//     : { firstName, lastName };
+
+//   // Executamos a consulta e retornamos o resultado
+//   const author = await connection()
+//     .then((db) => db.collection('authors').findOne(query));
+
+//   // Caso nenhum author seja encontrado, devolvemos null
+//   if (!author) return null;
+
+//   // Caso contrário, retornamos o author encontrado
+//   return getNewAuthor(author);
+// };
+
+// // Converte o nome dos campos de snake_case para camelCase
 
 // const serialize = (authorData) => ({
 //   id: authorData.id,
@@ -27,20 +45,19 @@ const getNewAuthor = (authorData) => {
 //   lastName: authorData.last_name,
 // });
 
-// Busca todos os autores do banco.
-async function getAll() {
-  return connection()
-    .then((db) => db.collection('products').find().toArray())
-    .then((authors) =>
-      authors.map(({ _id, firstName, middleName, lastName }) =>
-        getNewAuthor({
-          id: _id,
-          firstName,
-          middleName,
-          lastName,
-  })));
-}
+// Cria uma string com o nome completo do autor
+// const getNewAuthor = (authorData) => {
+//   const { id, firstName, middleName, lastName } = authorData;
 
-module.exports = {
-  getAll,
-};
+//   const fullName = [firstName, middleName, lastName]
+//     .filter((name) => name)
+//     .join(' ');
+
+//   return {
+//     id,
+//     firstName,
+//     middleName,
+//     lastName,
+//     name: fullName,
+//   };
+// };
