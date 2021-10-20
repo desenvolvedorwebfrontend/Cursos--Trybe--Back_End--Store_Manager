@@ -1,21 +1,22 @@
 const connection = require('./connection');
 
-// Busca todos os autores do banco.
+/** Busca todos os autores do banco. */
 async function getAll() {
   return connection()
     .then((db) => db.collection('products').find().toArray())
-    .then((authors) =>
-      authors.map(({ _id, name, quantity }) => (
-        {
-          id: _id,
-          name,
-          quantity,
-        }
-      )));
+    .then((product) => product);
+}
+
+/** Cria os produtos do banco. */ 
+async function create(name, quantity) {
+  return connection()
+    .then((db) => db.collection('products').insertOne({ name, quantity }))
+    .then((product) => product.ops[0]);
 }
 
 module.exports = {
   getAll,
+  create,
   // findByName,
 };
 
