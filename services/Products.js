@@ -19,3 +19,5 @@ const create = async (firstName, middleName, lastName) => {
   // chamamos o model e retornamos o resultado
   return Products.create(firstName, middleName, lastName);
 };
+
+module.exports = { create };
