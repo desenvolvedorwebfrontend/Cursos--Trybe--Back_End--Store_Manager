@@ -12,6 +12,15 @@ async function getById(req, res) {
 
   const result = await Products.getById(id);
 
+  if (!result) {
+    return res.status(StatusCodes.UNPROCESSABLE_ENTITY).send({
+      err: {
+        code: 'invalid_data',
+        message: 'Wrong id format',
+      },
+    });
+  }
+
   res.json(result);
 }
 
