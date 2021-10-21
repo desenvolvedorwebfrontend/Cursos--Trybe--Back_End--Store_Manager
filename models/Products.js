@@ -14,10 +14,16 @@ async function create(name, quantity) {
     .then((product) => product.ops[0]);
 }
 
+/** Busca pelo Nome */
+async function findByName(name) {
+  return connection()
+  .then((db) => db.collection('products').findOne({ name }));
+}
+
 module.exports = {
   getAll,
   create,
-  // findByName,
+  findByName,
 };
 
 // const findByName = async (firstName, middleName, lastName) => {
