@@ -7,6 +7,14 @@ async function getAll(req, res) {
   res.send(result);
 }
 
+async function getById(req, res) {
+  const { id } = req.params;
+
+  const result = await Products.getById(id);
+
+  res.json(result);
+}
+
 async function create(req, res) {
   const { name, quantity } = req.body;
   const findName = await Products.findByName(name);
@@ -24,4 +32,4 @@ async function create(req, res) {
   } res.status(StatusCodes.CREATED).send(result);
 }
 
-module.exports = { getAll, create };
+module.exports = { getAll, getById, create };

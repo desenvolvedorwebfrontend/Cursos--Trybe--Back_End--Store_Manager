@@ -1,9 +1,19 @@
+const { ObjectId } = require('mongodb');
 const connection = require('./connection');
 
-/** Busca todos os autores do banco. */
+/** Busca todos os produtos do banco. */
 async function getAll() {
   return connection()
     .then((db) => db.collection('products').find().toArray())
+    .then((product) => product);
+}
+
+/** Busca produto por ID */
+async function getById(id) {
+  if (!ObjectId.isValid(id)) return null;
+
+  return connection()
+    .then((db) => db.collection('products').findOne(new ObjectId(id)))
     .then((product) => product);
 }
 
@@ -22,6 +32,7 @@ async function findByName(name) {
 
 module.exports = {
   getAll,
+  getById,
   create,
   findByName,
 };

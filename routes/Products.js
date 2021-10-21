@@ -5,6 +5,7 @@ const Products = require('../controllers/Products');
 const router = express.Router();
 
 router.get('/', Products.getAll);
+router.get('/:id', Products.getById);
 
 router.post('/', validateData, Products.create);
 
