@@ -5,7 +5,7 @@ const connection = require('./connection');
 async function getAll() {
   return connection()
     .then((db) => db.collection('products').find().toArray())
-    .then((product) => product);
+    .then((product) => product.map(({ _id, name, quantity }) => ({ _id, name, quantity })));
 }
 
 /** Busca produto por ID */

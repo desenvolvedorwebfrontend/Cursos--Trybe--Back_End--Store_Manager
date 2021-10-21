@@ -3,8 +3,18 @@ const { StatusCodes } = require('http-status-codes');
 const Products = require('../models/Products');
 
 async function getAll(req, res) {
+  // const test = [];
   const result = await Products.getAll();
-  res.send(result);
+  // const resultObject = Object.assign({}, ...result);
+  // const resultReduce = result.reduce((obj, cur) => ({ ...obj, [cur]: cur }), {});
+  // const entries = Object.fromEntries(result);
+  // result.map((item) => test.push(item));
+
+  res.json(
+    {
+      products: result,
+    },
+  );
 }
 
 async function getById(req, res) {
@@ -31,7 +41,7 @@ async function create(req, res) {
 
   if (findName) {
     return res.status(StatusCodes.UNPROCESSABLE_ENTITY).send(
-      { 
+      {
         err: {
           code: 'invalid_data',
           message: 'Product already exists',
