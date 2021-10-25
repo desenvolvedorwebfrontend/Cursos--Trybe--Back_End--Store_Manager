@@ -3,18 +3,8 @@ const { StatusCodes } = require('http-status-codes');
 const Products = require('../models/Products');
 
 async function getAll(req, res) {
-  // const test = [];
   const result = await Products.getAll();
-  // const resultObject = Object.assign({}, ...result);
-  // const resultReduce = result.reduce((obj, cur) => ({ ...obj, [cur]: cur }), {});
-  // const entries = Object.fromEntries(result);
-  // result.map((item) => test.push(item));
-
-  res.json(
-    {
-      products: result,
-    },
-  );
+  res.json({ products: result });
 }
 
 async function getById(req, res) {
@@ -51,4 +41,12 @@ async function create(req, res) {
   } res.status(StatusCodes.CREATED).send(result);
 }
 
-module.exports = { getAll, getById, create };
+async function update(req, res) {
+  const { id } = req.params;
+  const { name, quantity } = req.body;
+  const result = await Products.updateById({ id, name, quantity }).then(() => ({ id, name, quantity }));
+
+  res.send(result);
+}
+
+module.exports = { getAll, getById, create, update };

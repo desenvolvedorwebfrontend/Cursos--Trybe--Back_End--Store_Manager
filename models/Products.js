@@ -30,11 +30,25 @@ async function findByName(name) {
   .then((db) => db.collection('products').findOne({ name }));
 }
 
+/** Atualiza pelo ID */
+async function updateById({ id, name, quantity }) {
+  if (!ObjectId.isValid(id)) return null;
+
+  return connection()
+  .then((db) => db.collection('products')
+    .updateOne(
+      { id: `${ObjectId(id)}` },
+      { $set: { name, quantity } },
+      { _id: 1, name: 1, quanitty: 1 },
+    ));
+}
+
 module.exports = {
   getAll,
   getById,
   create,
   findByName,
+  updateById,
 };
 
 // const findByName = async (firstName, middleName, lastName) => {
