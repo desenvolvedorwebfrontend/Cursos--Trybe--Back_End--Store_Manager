@@ -50,4 +50,8 @@ async function update(req, res) {
   res.send(result);
 }
 
-module.exports = { getAll, getById, create, update };
+async function deleteById(req, res) {
+  getById(req, res);
+}
+
+module.exports = { getAll, getById, create, update, deleteById };
