@@ -51,7 +51,21 @@ async function update(req, res) {
 }
 
 async function deleteById(req, res) {
-  getById(req, res);
+  const { id } = req.params;
+
+  const result = await Products.deleteById(id)
+    .then((ele) => (ele));
+
+  if (!result) {
+    return res.status(StatusCodes.UNPROCESSABLE_ENTITY).send({
+      err: {
+        code: 'invalid_data',
+        message: 'Wrong id format',
+      },
+    });
+  }
+
+  res.json(result);
 }
 
 module.exports = { getAll, getById, create, update, deleteById };

@@ -43,12 +43,22 @@ async function updateById({ id, name, quantity }) {
     ));
 }
 
+/** Exclui produto por ID */
+async function deleteById(id) {
+  if (!ObjectId.isValid(id)) return null;
+
+  return connection()
+  .then((db) => db.collection('products')
+    .deleteOne({ _id: new ObjectId(id) }));
+}
+
 module.exports = {
   getAll,
   getById,
   create,
   findByName,
   updateById,
+  deleteById,
 };
 
 // const findByName = async (firstName, middleName, lastName) => {
