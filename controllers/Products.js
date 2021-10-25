@@ -44,7 +44,8 @@ async function create(req, res) {
 async function update(req, res) {
   const { id } = req.params;
   const { name, quantity } = req.body;
-  const result = await Products.updateById({ id, name, quantity }).then(() => ({ id, name, quantity }));
+  const result = await Products.updateById({ id, name, quantity })
+    .then(() => ({ id, name, quantity }));
 
   res.send(result);
 }
