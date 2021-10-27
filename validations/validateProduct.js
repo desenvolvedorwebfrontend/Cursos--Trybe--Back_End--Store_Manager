@@ -1,17 +1,9 @@
 const { StatusCodes } = require('http-status-codes');
+const sendStatusError = require('./sendStatusError');
 
 const MESSAGE_ERROR1 = '"name" length must be at least 5 characters long';
 const MESSAGE_ERROR2 = '"quantity" must be larger than or equal to 1';
 const MESSAGE_ERROR3 = '"quantity" must be a number';
-
-function sendStatusError(code, message, res) {
-  res.status(code).json({
-    err: {
-      code: 'invalid_data',
-      message,
-    },
-  });
-}
 
 function invalidData(req, res, next) {
   const { name, quantity } = req.body;
