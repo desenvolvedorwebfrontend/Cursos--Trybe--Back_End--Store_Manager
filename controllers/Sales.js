@@ -33,7 +33,12 @@ async function getById(req, res) {
 }
 
 async function updateById(req, res) {
-  res.send(req.params.id);
+  const { id } = req.params;
+  const { productId, quantity } = req.body[0];
+  const result = await Sales.updateById({ id, productId, quantity })
+  .then(() => ({ _id: id, itensSold: [{ productId, quantity }] }));
+
+  res.send(result);
 }
 
 module.exports = {

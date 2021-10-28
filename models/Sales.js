@@ -18,12 +18,25 @@ async function getById(id) {
   if (!ObjectId.isValid(id)) return null;
 
   return connection()
-    .then((db) => db.collection('products').findOne(new ObjectId(id)))
+    .then((db) => db.collection('sales').findOne(new ObjectId(id)))
     .then((product) => product);
+}
+
+async function updateById({ id, productId, quantity }) {
+  console.log(id);
+  return connection()
+  .then((db) => db.collection('sales').updateOne(
+    { _id: ObjectId(id) },
+    { $set: {
+      itensSold: [productId, quantity],
+      },
+    },
+   ));  
 }
 
 module.exports = {
   getAll,
   create,
   getById,
+  updateById,
 };
