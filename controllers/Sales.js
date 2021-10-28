@@ -7,7 +7,8 @@ async function getAll(req, res) {
 }
 
 async function create(req, res) {
-  res.send(req.body);
+  console.log('controller');
+  res.send(req.body[0]);
 }
 
 module.exports = {
