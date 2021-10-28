@@ -10,7 +10,7 @@ function sales(req, res, next) {
   if (errQuantity) {
     return sendStatusError(StatusCodes.UNPROCESSABLE_ENTITY, MESSAGE_ERROR1, res);
   }
-  
+
   if (errTypeString) {
     return sendStatusError(StatusCodes.UNPROCESSABLE_ENTITY, MESSAGE_ERROR1, res);
   }

@@ -5,6 +5,7 @@ const validateSales = require('../validations/validateSales');
 const router = express.Router();
 
 router.get('/', Sales.getAll);
+router.get('/:id', Sales.getById);
 router.post('/', validateSales, Sales.create);
 
 module.exports = router;
