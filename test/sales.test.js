@@ -1,8 +1,8 @@
 const frisby = require('frisby');
 const { MongoClient } = require('mongodb');
 
-const mongoDbUrl = 'mongodb://localhost:27017/StoreManager';
-// const mongoDbUrl = 'mongodb://mongodb:27017/StoreManager';
+// const mongoDbUrl = 'mongodb://localhost:27017/StoreManager';
+const mongoDbUrl = 'mongodb://mongodb:27017/StoreManager';
 const url = 'http://localhost:3000';
 const invalidId = 99999;
 
@@ -571,7 +571,7 @@ describe('7 - Crie um endpoint para atualizar uma venda', () => {
   });
 });
 
-describe.skip('8 - Crie um endpoint para deletar uma venda', () => {
+describe('8 - Crie um endpoint para deletar uma venda', () => {
   let connection;
   let db;
 

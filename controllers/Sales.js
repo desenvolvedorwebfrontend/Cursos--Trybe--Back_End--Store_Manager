@@ -41,9 +41,26 @@ async function updateById(req, res) {
   res.send(result);
 }
 
+async function deleteById(req, res) {
+  const { id } = req.params;
+  const result = await Sales.getById(id);
+  const deleted = await Sales.deleteById(id);
+    // .then(({ productId, quantity }) => ({ _id: id, itensSold: [{ productId, quantity }] }));
+
+  if (!result) {
+    return res.status(StatusCodes.UNPROCESSABLE_ENTITY).send({
+      err: {
+        code: 'invalid_data',
+        message: 'Wrong sale ID format',
+      },
+    });
+  } res.status(200).send(deleted);
+}
+
 module.exports = {
   getAll,
   create,
   getById,
   updateById,
+  deleteById,
 };

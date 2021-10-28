@@ -23,7 +23,6 @@ async function getById(id) {
 }
 
 async function updateById({ id, productId, quantity }) {
-  console.log(id);
   return connection()
   .then((db) => db.collection('sales').updateOne(
     { _id: ObjectId(id) },
@@ -34,9 +33,18 @@ async function updateById({ id, productId, quantity }) {
    ));  
 }
 
+async function deleteById(id) {
+  return connection()
+  // .then((db) => db.collection('sales').findOne(ObjectId(id)))
+  .then((db) => db.collection('sales').deleteOne({ _id: ObjectId(id) }))
+  // .then((product) => product)
+  .catch((err) => console.error(err.message));
+}
+
 module.exports = {
   getAll,
   create,
   getById,
   updateById,
+  deleteById,
 };
