@@ -15,6 +15,13 @@ async function getAll() {
       })));
 }
 
+async function create(listProducts) {
+  return connection()
+    .then((db) => db.collection('sales').insertOne({ itensSold: listProducts }))
+    .then((productSold) => productSold.ops[0]);
+}
+
 module.exports = {
   getAll,
+  create,
 };
