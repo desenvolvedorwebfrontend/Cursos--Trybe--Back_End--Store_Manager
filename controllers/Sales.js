@@ -32,8 +32,13 @@ async function getById(req, res) {
   res.json(result);
 }
 
+async function updateById(req, res) {
+  res.send(req.params.id);
+}
+
 module.exports = {
   getAll,
   create,
   getById,
+  updateById,
 };
